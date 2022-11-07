@@ -53,6 +53,17 @@
   border: 1px solid gray;
 }
 
+.Remove-note-button {
+  margin-top: 10px;
+  color: black;
+  background-color: white;
+  border: 1px solid lightgray;
+}
+
+.Remove-note-button:hover {
+  box-shadow: 2px 2px 2px 2px red;
+}
+
 .Add-note-button:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
