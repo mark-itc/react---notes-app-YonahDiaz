@@ -38,11 +38,6 @@
   font-size: 1.2vmin;
 }
 
-.Date {
-  font-size: 0.9vmin;
-  text-decoration: underline;
-}
-
 .Note-title {
   font-size: 1.5vmin;
 }
@@ -54,7 +49,7 @@
 }
 
 .Remove-note-button {
-  margin-top: 10px;
+  margin-bottom: 10px;
   color: black;
   background-color: white;
   border: 1px solid lightgray;

@@ -3,20 +3,23 @@ import React from "react";
 import { useState } from "react";
 
 function NotesAndButton() {
-  const [note, setNote] = useState([]);
+  const [notes, setNotes] = useState([]);
 
   const addNoteOnClick = () => {
-    setNote((noteArray) => [...noteArray, `${new Date().toLocaleString()}`]);
+    setNotes((noteArray) => [...noteArray, `${new Date().toLocaleString()}`]);
   };
 
-  const deleteNoteButton = () => {
-    console.log("delete");
+  const deleteNoteButton = (index) => {
+    if (window.confirm("Are you sure you want to delete your note?")) {
+      const noteDelete = notes.filter((note) => notes.indexOf(note) !== index);
+      setNotes(noteDelete);
+    }
   };
 
   return [
     <div>
-      {note.map((note, index) => (
-        <div key={index} className="Note">
+      {notes.map((note, index) => (
+        <div className="Note">
           <div className="Note-title">{"Note title:"}</div>
           <div className="IndividualNotes">
             {"Example note"}
@@ -24,13 +27,14 @@ function NotesAndButton() {
             {note}
           </div>
           <p></p>
-
+          ----
           <input
             type="button"
-            onClick={deleteNoteButton}
+            onClick={() => deleteNoteButton(index)}
             className="Remove-note-button"
             value="Remove Note"
           />
+          ----
         </div>
       ))}
     </div>,
