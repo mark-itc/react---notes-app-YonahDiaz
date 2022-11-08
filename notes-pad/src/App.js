@@ -17,7 +17,6 @@ function NotesAndButton() {
   };
   function getNoteInfo(index) {
     const noteInfo = notes.filter((note) => notes.indexOf(note) === index);
-    console.log(noteInfo);
     return noteInfo;
   }
   return [
