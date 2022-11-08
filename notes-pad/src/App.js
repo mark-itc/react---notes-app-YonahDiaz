@@ -4,7 +4,7 @@ import { useState } from "react";
 
 function NotesAndButton() {
   const [notes, setNotes] = useState([]);
-
+  const [isOpen, setIsOpen] = useState(false);
   const addNoteOnClick = () => {
     setNotes((noteArray) => [...noteArray, `${new Date().toLocaleString()}`]);
   };
@@ -15,13 +15,24 @@ function NotesAndButton() {
       setNotes(noteDelete);
     }
   };
-
+  function getNoteInfo(index) {
+    const noteInfo = notes.filter((note) => notes.indexOf(note) === index);
+    console.log(noteInfo);
+    return noteInfo;
+  }
   return [
     <div>
       {notes.map((note, index) => (
         <div className="Note">
-          <div className="Note-title">{"Note title:"}</div>
-          <div className="IndividualNotes">
+          <div
+            className="IndividualNotes"
+            onClick={() => {
+              setIsOpen(true);
+              document.getElementById("pop-up-info").innerHTML =
+                getNoteInfo(index);
+            }}
+          >
+            <div className="Note-title">{"Note title:"}</div>
             {"Example note"}
             <p></p>
             {note}
@@ -37,6 +48,23 @@ function NotesAndButton() {
           ----
         </div>
       ))}
+      {isOpen && (
+        <div className="Pop-up">
+          <div>
+            {"Note title:"}
+            <p></p>
+            {"Example note"}
+            <p></p>
+            <div id="pop-up-info">Click on a note to see details</div>
+          </div>
+          <button
+            className="Button-close-pop-up"
+            onClick={() => setIsOpen(false)}
+          >
+            X
+          </button>
+        </div>
+      )}
     </div>,
 
     <input
