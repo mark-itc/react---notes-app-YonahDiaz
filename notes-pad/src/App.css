@@ -56,8 +56,9 @@
   right: 25%;
 }
 
-.Note-title {
+.Note-content {
   font-size: 1.5vmin;
+  text-align: center;
 }
 
 .Add-note-button {

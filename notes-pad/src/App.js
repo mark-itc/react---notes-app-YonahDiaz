@@ -7,7 +7,16 @@ function NotesAndButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [popUp, setPopUp] = useState("");
   const addNoteOnClick = () => {
-    setNotes((noteArray) => [...noteArray, `${new Date().toLocaleString()}`]);
+    setNotes((noteArray) => [
+      ...noteArray,
+      `${
+        `Note Title` +
+        "\n" +
+        `Example note` +
+        "\n" +
+        new Date().toLocaleString()
+      }`,
+    ]);
   };
 
   const deleteNoteButton = (index) => {
@@ -21,9 +30,9 @@ function NotesAndButton() {
     return noteInfo;
   }
   return [
-    <div>
+    <div key="100">
       {notes.map((note, index) => (
-        <div className="Note">
+        <div key={index} className="Note">
           <div
             className="IndividualNotes"
             onClick={() => {
@@ -31,10 +40,7 @@ function NotesAndButton() {
               setPopUp(getNoteInfo(index));
             }}
           >
-            <div className="Note-title">{"Note title:"}</div>
-            {"Example note"}
-            <p></p>
-            {note}
+            <div className="Note-content">{note}</div>
           </div>
           <p></p>
           ----
@@ -47,13 +53,10 @@ function NotesAndButton() {
           ----
         </div>
       ))}
+
       {isOpen && (
         <div className="Pop-up">
           <div>
-            {"Note title:"}
-            <p></p>
-            {"Example note"}
-            <p></p>
             <div>{popUp}</div>
           </div>
           <button
@@ -67,6 +70,7 @@ function NotesAndButton() {
     </div>,
 
     <input
+      key="600"
       type="button"
       className="Add-note-button"
       onClick={addNoteOnClick}
