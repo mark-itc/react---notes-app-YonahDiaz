@@ -31,7 +31,10 @@
 .Notes-grid {
   height: 50%;
   width: 25%;
-  background-color: beige;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: lightgray;
 }
 
 .Note {
@@ -64,14 +67,16 @@
 .Add-note-button {
   color: white;
   background-color: black;
-  border: 1px solid gray;
+  border: 1px solid white;
 }
 
 .Remove-note-button {
   margin-bottom: 10px;
   color: black;
   background-color: white;
-  border: 1px solid lightgray;
+  border: 1px solid black;
+  background-color: gray;
+  color: white;
 }
 
 .Remove-note-button:hover {
@@ -90,4 +95,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Title-field {
+  height: 10px;
+  width: 90%;
+  border-radius: 2.5px;
+}
+
+.Note-field {
+  height: 50px;
+  width: 90%;
+  margin: 5px;
+  border-radius: 2.5px;
 }

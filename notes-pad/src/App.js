@@ -2,21 +2,19 @@ import "./App.css";
 import React from "react";
 import { useState } from "react";
 
-function NotesAndButton() {
+function NotesAndButton(props) {
   const [notes, setNotes] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [popUp, setPopUp] = useState("");
   const addNoteOnClick = () => {
-    setNotes((noteArray) => [
-      ...noteArray,
-      `${
-        `Note Title` +
-        "\n" +
-        `Example note` +
-        "\n" +
-        new Date().toLocaleString()
-      }`,
-    ]);
+    if (props.noteText === "") {
+      return;
+    } else {
+      setNotes((noteArray) => [
+        ...noteArray,
+        [[props.title], [props.noteText], [new Date().toLocaleString()]],
+      ]);
+    }
   };
 
   const deleteNoteButton = (index) => {
@@ -40,7 +38,13 @@ function NotesAndButton() {
               setPopUp(getNoteInfo(index));
             }}
           >
-            <div className="Note-content">{note}</div>
+            <div className="Note-content">
+              {note[0]}
+              <br></br>
+              {note[1]}
+              <br></br>
+              {note[2]}
+            </div>
           </div>
           <p></p>
           ----
@@ -57,13 +61,19 @@ function NotesAndButton() {
       {isOpen && (
         <div className="Pop-up">
           <div>
-            <div>{popUp}</div>
+            <div>
+              {popUp[0][0]}
+              <br></br>
+              {popUp[0][1]}
+              <br></br>
+              {popUp[0][2]}
+            </div>
           </div>
           <button
             className="Button-close-pop-up"
             onClick={() => setIsOpen(false)}
           >
-            X
+            Close
           </button>
         </div>
       )}
@@ -73,18 +83,36 @@ function NotesAndButton() {
       key="600"
       type="button"
       className="Add-note-button"
-      onClick={addNoteOnClick}
+      onClick={() => addNoteOnClick()}
       value="Add note"
     />,
   ];
 }
 
 function App() {
+  const [title, setTitle] = useState("");
+  const [noteText, setNoteText] = useState("");
   return (
     <div className="App">
       <header className="App-header">
         <div className="Notes-grid">
-          <NotesAndButton />
+          <NotesAndButton title={title} noteText={noteText} />
+          <div>
+            <input
+              className="Title-field"
+              type="text"
+              placeholder="Title"
+              onChange={(e) => setTitle(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <input
+              className="Note-field"
+              type="text"
+              placeholder="Notes"
+              onChange={(e) => setNoteText(e.target.value)}
+            ></input>
+          </div>
         </div>
       </header>
     </div>
