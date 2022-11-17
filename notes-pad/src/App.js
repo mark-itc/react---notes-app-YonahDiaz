@@ -23,10 +23,10 @@ function NotesAndButton(props) {
       setNotes(noteDelete);
     }
   };
-  function getNoteInfo(index) {
+  const getNoteInfo = (index) => {
     const noteInfo = notes.filter((note) => notes.indexOf(note) === index);
     return noteInfo;
-  }
+  };
   return [
     <div key="100">
       {notes.map((note, index) => (
@@ -89,30 +89,48 @@ function NotesAndButton(props) {
   ];
 }
 
+function NoteTitleInput(props) {
+  return (
+    <div>
+      <input
+        className="Title-field"
+        type="text"
+        placeholder="Title"
+        onChange={props.onChange}
+      ></input>
+    </div>
+  );
+}
+
+function NoteTextInput(props) {
+  return (
+    <div>
+      <input
+        className="Note-field"
+        type="text"
+        onChange={props.onChange}
+      ></input>
+    </div>
+  );
+}
 function App() {
   const [title, setTitle] = useState("");
   const [noteText, setNoteText] = useState("");
+
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const onChangeNote = (e) => {
+    setNoteText(e.target.value);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <div className="Notes-grid">
           <NotesAndButton title={title} noteText={noteText} />
-          <div>
-            <input
-              className="Title-field"
-              type="text"
-              placeholder="Title"
-              onChange={(e) => setTitle(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <input
-              className="Note-field"
-              type="text"
-              placeholder="Notes"
-              onChange={(e) => setNoteText(e.target.value)}
-            ></input>
-          </div>
+          <NoteTitleInput onChange={onChangeTitle} />
+          <NoteTextInput onChange={onChangeNote} />
         </div>
       </header>
     </div>
